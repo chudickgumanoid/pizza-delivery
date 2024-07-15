@@ -5,29 +5,15 @@
         <div class="tw-flex tw-items-center">
           <router-link to="/">
             <img
-              src="/public/img/logo.png"
+              src="/img/logo.png"
               alt="pizza logo"
             />
           </router-link>
 
-          <div class="tw-flex tw-gap-8">
-            <template
-              v-for="nav in navItems.left"
-              :key="nav.title"
-            >
-              <HeaderItem :nav="nav" />
-            </template>
-          </div>
+          <NavItems :items="navItems.left" />
         </div>
 
-        <div class="tw-flex tw-gap-8">
-          <template
-            v-for="nav in navItems.right"
-            :key="nav.title"
-          >
-            <HeaderItem :nav="nav" />
-          </template>
-        </div>
+        <NavItems :items="navItems.right" />
       </div>
     </div>
   </div>
@@ -47,7 +33,7 @@ import TimeIcon from "@/components/UI/icons/TimeIcon.vue";
 import UserIcon from "@/components/UI/icons/UserIcon.vue";
 import { ROUTES } from "@/utils/routes";
 import { ref } from "vue";
-import HeaderItem from "./components/HeaderItem.vue";
+import NavItems from "./components/NavItems.vue";
 import LoginModal from "@/pages/login/LoginModal.vue";
 
 const showModal = ref(false);

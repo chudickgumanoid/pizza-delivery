@@ -1,4 +1,5 @@
 import axios from "axios";
+import { LOCAL_STORAGE } from "../consts";
 
 const baseURL = import.meta.env.VITE_BASE_API_URL;
 
@@ -7,7 +8,7 @@ const instance = axios.create({
 });
 
 instance.defaults.headers.common["Authorization"] =
-  localStorage.getItem("token") || "";
+  "Bearer " + localStorage.getItem(LOCAL_STORAGE.TOKEN) || "";
 
 instance.interceptors.response.use(
   (response) => {

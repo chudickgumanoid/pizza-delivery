@@ -111,21 +111,20 @@ const handleKeyDown = (event) => {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 16px;
     background: #fff;
-    &.style-off {
-      padding: 0px;
-    }
     max-width: 1500px;
-    min-width: 400px;
-    padding: 0 72px;
-    @media (max-width: 500px) {
-      min-width: 100%;
-    }
-    // min-width: 80%;
-
     display: flex;
     flex-direction: column;
     gap: 8px;
     transition: all 0.3s;
+    padding: 0 48px;
+
+    &.style-off {
+      padding: 0px;
+    }
+    @media (max-width: 500px) {
+      min-width: 100%;
+    }
+    // min-width: 80%;
 
     .exit {
       cursor: pointer;
