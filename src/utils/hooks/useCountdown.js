@@ -1,4 +1,4 @@
-import { ref, onUnmounted } from "vue";
+import { computed, onUnmounted, ref } from "vue";
 
 export const useCountdown = (initialTime) => {
   const time = ref(Math.floor(initialTime / 1000));
@@ -26,5 +26,7 @@ export const useCountdown = (initialTime) => {
     clearInterval(interval);
   });
 
-  return { time, reset };
+  const isFinished = computed(() => time.value === 0);
+
+  return { time, isFinished, reset };
 };

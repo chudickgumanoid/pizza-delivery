@@ -24,11 +24,12 @@
       />
     </div>
 
-    <div class="tw-flex tw-flex-col tw-gap-2">
+    <div class="tw-flex tw-flex-col tw-gap-4">
       <m-button @click="handleClick"> Продолжить </m-button>
       <CodeResendTimer
         v-if="successOTP.isShow"
         :time="successOTP.delay"
+        @resend="getOTPCode"
       />
     </div>
   </div>
@@ -36,10 +37,15 @@
 
 <script setup>
 import CodeResendTimer from "@/components/CodeResendTimer.vue";
+import { useAuthStore } from "@/store/auth";
 import { userCreateOTP, userSignIn } from "@/utils/api/requests/auth";
 import { LOCAL_STORAGE } from "@/utils/consts";
 import { clearString } from "@/utils/helper/clearString";
 import { ref } from "vue";
+
+const storeAuth = useAuthStore();
+
+const emit = defineEmits("create");
 
 const formState = ref({
   phone: "",
@@ -51,12 +57,16 @@ const successOTP = ref({
   delay: "",
 });
 
+const getOTPCode = async () => {
+  await userCreateOTP(formState.value.phone).then(({ data }) => {
+    successOTP.value.isShow = true;
+    successOTP.value.delay = data.retryDelay;
+  });
+};
+
 const handleClick = async () => {
   if (!successOTP.value.isShow) {
-    await userCreateOTP(formState.value.phone).then(({ data }) => {
-      successOTP.value.isShow = true;
-      successOTP.value.delay = data.retryDelay;
-    });
+    await getOTPCode();
   } else {
     const model = {
       ...formState.value,
@@ -65,6 +75,8 @@ const handleClick = async () => {
     await userSignIn(model).then(({ data }) => {
       console.log(data, "data");
       localStorage.setItem(LOCAL_STORAGE.TOKEN, data.token);
+      emit("create");
+      storeAuth.handleLogin();
     });
   }
 };

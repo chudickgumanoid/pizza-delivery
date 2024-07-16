@@ -65,15 +65,17 @@ const typographyClass = computed(() => {
 }
 
 .typography-h2 {
-  font-size: 1.875rem;
   font-weight: 700;
-  line-height: 2.25rem;
+  font-size: 24px;
+  line-height: 32px;
+  color: #141c24;
 }
 
 .typography-h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 2rem;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #292929;
 }
 
 .typography-h4 {
@@ -83,9 +85,10 @@ const typographyClass = computed(() => {
 }
 
 .typography-h5 {
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.5rem;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #292929;
 }
 
 .typography-h6 {
@@ -95,21 +98,31 @@ const typographyClass = computed(() => {
 }
 
 .typography-subtitle {
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.5rem;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #141c24;
 }
 
 .typography-body {
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 1.5rem;
+  line-height: 24px;
+  color: #535353;
 }
 
 .typography-caption {
-  font-size: 0.75rem;
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 400;
-  line-height: 1rem;
+  color: #97a1af;
+}
+
+.typography-paragraph {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #141c24;
 }
 
 .typography-overline {

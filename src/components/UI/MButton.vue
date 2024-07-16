@@ -42,21 +42,23 @@ const sizeClass = computed(() => {
 
 <style lang="scss" scoped>
 .btn {
-  padding: 0.5rem 1rem;
   font-weight: 600;
-  border-radius: 0.375rem;
   border: none;
+  line-height: 24px;
   width: 100%;
   cursor: pointer;
+  transition: all 0.3s 0s ease;
+  padding: 16px 0;
+  border-radius: 16px;
 
   &-primary {
-    background-color: #1e3a8a;
+    background-color: #f4511e;
     color: white;
     &:hover {
-      background-color: #1c3b82;
+      background-color: #f0673d;
     }
     &:active {
-      background-color: #192f74;
+      background-color: #f54610;
     }
     &.btn-disabled {
       background-color: #a5b4fc;
@@ -116,17 +118,17 @@ const sizeClass = computed(() => {
 
   &-sm {
     font-size: 0.875rem;
-    padding: 0.25rem 0.5rem;
+    padding: 12px 0;
   }
 
   &-md {
     font-size: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 16px 0;
   }
 
   &-lg {
     font-size: 1.125rem;
-    padding: 0.75rem 1.5rem;
+    padding: 20px 0;
   }
 }
 </style>

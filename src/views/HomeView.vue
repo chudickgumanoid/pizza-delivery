@@ -1,7 +1,11 @@
 <template>
-  <div>home view</div>
+  <div>{{ data }}</div>
 </template>
 
-<script setup></script>
+<script setup>
+import { usePizzas } from "@/utils/hooks/usePizzas";
+
+const { data } = usePizzas();
+</script>
 
 <style lang="scss" scoped></style>

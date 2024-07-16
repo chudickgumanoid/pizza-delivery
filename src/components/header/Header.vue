@@ -22,7 +22,7 @@
     v-model:show="showModal"
     :hideClose="true"
   >
-    <LoginModal />
+    <LoginModal @create="showModal = false" />
   </m-modal>
 </template>
 
@@ -31,10 +31,13 @@ import BasketIcon from "@/components/UI/icons/BasketIcon.vue";
 import LoginIcon from "@/components/UI/icons/LoginIcon.vue";
 import TimeIcon from "@/components/UI/icons/TimeIcon.vue";
 import UserIcon from "@/components/UI/icons/UserIcon.vue";
-import { ROUTES } from "@/utils/routes";
-import { ref } from "vue";
-import NavItems from "./components/NavItems.vue";
 import LoginModal from "@/pages/login/LoginModal.vue";
+import { useAuthStore } from "@/store/auth";
+import { ROUTES } from "@/utils/routes";
+import { computed, ref } from "vue";
+import NavItems from "./components/NavItems.vue";
+
+const storeAuth = useAuthStore();
 
 const showModal = ref(false);
 const navItems = ref({
@@ -50,20 +53,21 @@ const navItems = ref({
       icon: TimeIcon,
     },
   ],
-  right: [
+  right: computed(() => [
     {
       title: "Корзина",
       path: ROUTES.BASKET,
       icon: BasketIcon,
     },
     {
-      title: "Войти",
+      title: storeAuth.isAuth ? "Выйти" : "Войти",
       onClick() {
-        showModal.value = true;
+        if (storeAuth.isAuth) storeAuth.handleLogout();
+        else showModal.value = true;
       },
       icon: LoginIcon,
     },
-  ],
+  ]),
 });
 </script>
 

@@ -13,7 +13,7 @@ const router = createRouter({
     {
       path: ROUTES.HOME,
       name: "home",
-      component: () => import("@/views/HomeView.vue"),
+      component: () => import("@/views/PizzaView.vue"),
       meta: { layout, requiresAuth: true },
     },
     {
