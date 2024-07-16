@@ -3,10 +3,10 @@
     <div class="tw-flex-[0_0_30%]">
       <m-img-link
         :src="props.pizza.img"
-        class="tw-max-w-[220px] mxau"
+        class="tw-max-w-[220px]"
       />
     </div>
-    <div class="tw-flex-[1_1_70%] tw-max-h-[90vh] tw-overflow-y-auto tw-p-4">
+    <div class="tw-flex-[1_1_70%] tw-overflow-y-auto tw-p-4 tw-relative">
       <div class="tw-flex tw-flex-col tw-gap-2">
         <m-text variant="h3">{{ pizza.name }}</m-text>
         <m-text variant="body">{{ getSize }} см, {{ getDough }}</m-text>
@@ -37,10 +37,14 @@
             :ingredient
             @choose="handleChoose"
           />
+          <IngredientCard
+            :ingredient
+            @choose="handleChoose"
+          />
         </div>
       </div>
-      {{ ingredients.length }}
-      <m-button>Добавить в корзину</m-button>
+
+      <m-button @click="setToBasket"> Добавить в корзину </m-button>
     </div>
   </div>
 </template>
@@ -49,18 +53,22 @@
 import { PIZZA_DOUGHS, PIZZA_SIZES } from "@/utils/consts";
 import { computed, ref } from "vue";
 import IngredientCard from "./IngredientCard.vue";
+import { usePizzaStore } from "@/stores/pizza";
 
 const props = defineProps({
   pizza: Object,
 });
+
+const storePizza = usePizzaStore();
 const ingredients = ref([]);
+
 const handleChoose = (ingredient) => {
-  if (ingredient.name) {
-    ingredients.value = ingredients.value.filter(
-      (el) => el.name !== ingredient.name
-    );
-  }
-  ingredients.value.push(ingredient);
+  const index = ingredients.value.findIndex(
+    (el) => el.name === ingredient.name
+  );
+
+  if (index !== -1) ingredients.value.splice(index, 1);
+  else ingredients.value.push(ingredient);
 };
 
 const tabsSize = ref({ isTab: () => "", currentTab: "SMALL" });
@@ -89,6 +97,30 @@ const getDough = computed(
     PIZZA_DOUGHS[tabsDoughs.value.currentTab].toLowerCase() + " тесто" ||
     "традиционное тесто"
 );
+
+const setToBasket = () => {
+  const size = props.pizza.sizes.find(
+    (el) => tabsSize.value.currentTab === el.name
+  );
+  const dough = props.pizza.doughs.find(
+    (el) => tabsDoughs.value.currentTab === el.name
+  );
+  const pizza = {
+    // id: "1", // TODO: возможно понадобится, надо на бек посмотреть
+    name: props.pizza.name,
+    toppings: [...ingredients.value],
+    description: props.pizza.description,
+    size: {
+      name: size.name,
+      price: size.price,
+    },
+    doughs: {
+      name: dough.name,
+      price: dough.price,
+    },
+  };
+  storePizza.pizzas.push(pizza);
+};
 </script>
 
 <style lang="scss" scoped></style>

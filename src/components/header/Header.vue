@@ -32,7 +32,7 @@ import LoginIcon from "@/components/UI/icons/LoginIcon.vue";
 import TimeIcon from "@/components/UI/icons/TimeIcon.vue";
 import UserIcon from "@/components/UI/icons/UserIcon.vue";
 import LoginModal from "@/pages/login/LoginModal.vue";
-import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from "@/stores/auth";
 import { ROUTES } from "@/utils/routes";
 import { computed, ref } from "vue";
 import NavItems from "./components/NavItems.vue";

@@ -1,5 +1,6 @@
 export const LOCAL_STORAGE = {
   TOKEN: "token",
+  PIZZAS: "pizzas",
 };
 
 export const PIZZA_SIZES = {

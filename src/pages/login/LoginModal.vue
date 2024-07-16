@@ -37,7 +37,7 @@
 
 <script setup>
 import CodeResendTimer from "@/components/CodeResendTimer.vue";
-import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from "@/stores/auth";
 import { userCreateOTP, userSignIn } from "@/utils/api/requests/auth";
 import { LOCAL_STORAGE } from "@/utils/consts";
 import { clearString } from "@/utils/helper/clearString";

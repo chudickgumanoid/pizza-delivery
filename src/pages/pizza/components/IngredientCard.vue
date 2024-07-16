@@ -1,7 +1,8 @@
 <template>
   <div
     @click="handleChoose"
-    class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-gap-2 tw-shadow-[0px_4px_12px_0px_#1A1A1E26] tw-bg-white tw-p-2 tw-rounded-2xl"
+    class="tw-flex tw-flex-col tw-cursor-pointer tw-items-center tw-justify-center tw-gap-2 tw-shadow-[0px_4px_12px_0px_#1A1A1E26] tw-bg-white tw-p-2 tw-rounded-2xl tw-border-2 tw-border-transparent tw-border-solid tw-transition-all"
+    :class="{ '!tw-border-primary': isChoose }"
   >
     <m-img-link
       :src="props.ingredient.img"
@@ -13,14 +14,17 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 const props = defineProps({
   ingredient: Object,
 });
 
 const emit = defineEmits(["choose"]);
+const isChoose = ref(false);
 
 const handleChoose = () => {
   emit("choose", props.ingredient);
+  isChoose.value = !isChoose.value;
 };
 </script>
 

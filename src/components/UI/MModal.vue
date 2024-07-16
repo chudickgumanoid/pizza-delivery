@@ -11,7 +11,7 @@
         <div
           @click.stop
           @mousedown.stop
-          class="dialog__content tw-max-h-[90vh]"
+          class="dialog__content tw-max-h-[80vh]"
           :class="{ 'style-off': props.styleOff }"
         >
           <CloseIcon
@@ -28,8 +28,7 @@
           </h3>
 
           <div
-            ref="scrollContainer"
-            class="custom-scroll dialog__body-content"
+            class="dialog__body-content"
             :class="{ 'style-off': props.styleOff }"
           >
             <slot />

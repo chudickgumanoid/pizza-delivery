@@ -32,7 +32,6 @@ const showCurrentPizza = ref(false);
 const currentPizza = ref({});
 
 const handleOpenModal = (pizza) => {
-  console.log(pizza, "pizza");
   showCurrentPizza.value = true;
   currentPizza.value = pizza;
 };

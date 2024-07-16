@@ -4,8 +4,8 @@
       v-for="item in props.options"
       :key="item.key"
       @click="changeTab(item.key)"
-      :class="{ active: currentTab == item.key }"
       class="tabs__header"
+      :class="{ active: currentTab == item.key }"
     >
       {{ item.label }}
     </div>

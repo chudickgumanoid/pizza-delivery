@@ -1,12 +1,10 @@
-import { useRoute } from "vue-router";
-import { ref, onMounted } from "vue";
+import { onMounted, ref } from "vue";
 
 export const useTabs = (
   defaultTab,
   sessionStateKey = "tabSession" + defaultTab
 ) => {
   const currentTab = ref(defaultTab);
-  const route = useRoute();
 
   const changeTab = (tab) => {
     sessionStorage.setItem(sessionStateKey, tab);
