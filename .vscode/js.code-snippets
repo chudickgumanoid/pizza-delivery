@@ -1,0 +1,103 @@
+{
+  "onMounted with load": {
+    "prefix": "js-onMount-load",
+    "body": [
+      "onMounted(async () => {",
+      "  isLoad.value = true;",
+      "  await ${1:fetchFunc}();",
+      "  isLoad.value = false;",
+      "});",
+    ],
+    "description": "Modal window with title",
+  },
+  "click validate": {
+    "prefix": "js-click-validate",
+    "body": [
+      "const handleValidateClick = async () => {",
+      "  const result = await v$.value.$validate();",
+      "  if (result) {",
+      "    ${1:other}",
+      "  }",
+      "};",
+    ],
+    "description": "Click validate function with cursor at specific place",
+  },
+  "set useVuelidate": {
+    "prefix": "js-set-vuelidate",
+    "body": [
+      "import { useVuelidate } from \"@vuelidate/core\";",
+      "const rules = computed(() => {",
+      "  return {",
+      "  };",
+      "});\n",
+      "const v$ = useVuelidate(rules, formState);",
+    ],
+    "description": "Set default import and rules for useVuelidate",
+  },
+  "set formStateComp": {
+    "prefix": "js-set-formStateComp",
+    "body": [
+      "const formStateComp = computed(() => {",
+      "  const state = props.mode ? props.formState : formState.value;\n",
+      "  return state;",
+      "});",
+    ],
+    "description": "Set default import and rules for useVuelidate",
+  },
+  "set piniaStore": {
+    "prefix": "js-store",
+    "body": [
+      "import { defineStore } from \"pinia\";",
+      "export const use${TM_FILENAME_BASE/(.*)/${1:/capitalize}/}Store = defineStore(\"${TM_FILENAME_BASE}\", () => {",
+      "  $1",
+      "  return {",
+      "  }",
+      "});",
+    ],
+    "description": "Set default import and rules for useVuelidate",
+  },
+  "vue watch callback": {
+    "prefix": "js-vue-watch-callback",
+    "body": [
+      "watch(",
+      "  () => ${1:key},",
+      "  (newValue, oldValue) => {\n",
+      "  },",
+      ");",
+    ],
+    "description": "vue watch callback",
+  },
+  "vue watch": {
+    "prefix": "js-vue-watch",
+    "body": [
+      "watch(",
+      "  ${1:key},",
+      "  (newValue, oldValue) => {\n",
+      "  },",
+      ");",
+    ],
+    "description": "vue watch",
+  },
+  "set naive message": {
+    "prefix": "js-naive-message",
+    "body": [
+      "import { useMessage } from \"naive-ui\";",
+      "const message = useMessage();",
+    ],
+    "description": "set naive message",
+  },
+  "message error": {
+    "prefix": "js-message-error",
+    "body": [
+      "import { getErrorFromApiJson } from \"@/helper/getErrorFromApiJson\";",
+      "console.error(e)",
+      "message.error(getErrorFromApiJson(e))",
+    ],
+    "description": "set naive message",
+  },
+  "axios general": {
+    "prefix": "js-axios-g",
+    "body": ["import axios from \"@/axios/axios_general\";"],
+    "description": "axios general",
+  },
+}
