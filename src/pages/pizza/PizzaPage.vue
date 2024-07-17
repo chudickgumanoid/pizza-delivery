@@ -8,12 +8,33 @@
       :key="pizza.id"
     >
       <PizzaCard
+        :isLoad="isFetching"
         :pizza="pizza"
         @choose="handleOpenModal"
       />
     </template>
   </div>
-  <div v-else>Загрузка...</div>
+  <div v-else>
+    <div
+      class="tw-grid tw-grid-cols-1 tw-gap-4 md:tw-grid-cols-2 lg:tw-grid-cols-3"
+    >
+      <template
+        v-for="i in 6"
+        :key="i"
+      >
+        <div class="tw-flex tw-flex-col tw-gap-4">
+          <m-skeleton
+            :rowCount="1"
+            rowHeight="368px"
+          />
+          <m-skeleton
+            :rowCount="1"
+            rowHeight="68px"
+          />
+        </div>
+      </template>
+    </div>
+  </div>
 
   <m-modal v-model:show="showCurrentPizza">
     <PizzaModal :pizza="currentPizza" />

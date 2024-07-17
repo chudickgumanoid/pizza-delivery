@@ -37,10 +37,6 @@
             :ingredient
             @choose="handleChoose"
           />
-          <IngredientCard
-            :ingredient
-            @choose="handleChoose"
-          />
         </div>
       </div>
 
@@ -105,6 +101,7 @@ const setToBasket = () => {
   const dough = props.pizza.doughs.find(
     (el) => tabsDoughs.value.currentTab === el.name
   );
+  const dopingsPrice = ingredients.value.reduce((acc, el) => acc + el.cost, 0);
   const pizza = {
     // id: "1", // TODO: возможно понадобится, надо на бек посмотреть
     name: props.pizza.name,
@@ -118,6 +115,8 @@ const setToBasket = () => {
       name: dough.name,
       price: dough.price,
     },
+    price: size.price + dough.price + dopingsPrice,
+    img: props.pizza.img,
   };
   storePizza.pizzas.push(pizza);
 };

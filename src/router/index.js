@@ -21,6 +21,11 @@ const router = createRouter({
       name: "login",
       component: () => import("@/views/LoginView.vue"),
     },
+    {
+      path: ROUTES.BASKET,
+      name: "basket",
+      component: () => import("@/views/BasketView.vue"),
+    },
   ],
 });
 

@@ -13,5 +13,6 @@ import Header from "@/components/header/Header.vue";
 
 <style scoped>
 .container {
+  padding: 48px 0;
 }
 </style>

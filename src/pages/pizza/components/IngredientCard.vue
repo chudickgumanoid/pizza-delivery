@@ -1,7 +1,7 @@
 <template>
   <div
     @click="handleChoose"
-    class="tw-flex tw-flex-col tw-cursor-pointer tw-items-center tw-justify-center tw-gap-2 tw-shadow-[0px_4px_12px_0px_#1A1A1E26] tw-bg-white tw-p-2 tw-rounded-2xl tw-border-2 tw-border-transparent tw-border-solid tw-transition-all"
+    class="card"
     :class="{ '!tw-border-primary': isChoose }"
   >
     <m-img-link
@@ -9,12 +9,14 @@
       class="tw-max-w-[108px]"
     />
     <m-text>{{ props.ingredient.name }}</m-text>
-    <m-text>{{ props.ingredient.cost }}</m-text>
+    <m-text>{{ toLocaleString(props.ingredient.cost) }}</m-text>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { toLocaleString } from "@/utils/helper/toLocaleString";
+
 const props = defineProps({
   ingredient: Object,
 });
@@ -28,4 +30,8 @@ const handleChoose = () => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.card {
+  @apply tw-flex tw-flex-col tw-cursor-pointer tw-items-center tw-justify-center tw-gap-2 tw-shadow-[0px_4px_12px_0px_#1A1A1E26] tw-bg-white tw-p-2 tw-rounded-2xl tw-border-2 tw-border-transparent tw-border-solid tw-transition-all;
+}
+</style>

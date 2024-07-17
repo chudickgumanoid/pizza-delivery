@@ -41,7 +41,7 @@
 
 <script setup>
 import CloseIcon from "@/components/UI/icons/CloseIcon.vue";
-import { onMounted, onUnmounted } from "vue";
+import { onMounted, onUnmounted, watch } from "vue";
 
 const props = defineProps({
   show: {
@@ -50,10 +50,26 @@ const props = defineProps({
   },
   title: String,
   hideClose: { type: Boolean, default: false },
+  styleOff: { type: Boolean, default: false },
 });
 const emits = defineEmits(["update:show"]);
+
 const hideDialog = () => {
   emits("update:show", false);
+};
+
+const handleKeyDown = (event) => {
+  if (event.key === "Escape") {
+    hideDialog();
+  }
+};
+
+const toggleBodyScroll = (shouldBlock) => {
+  if (shouldBlock) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
 };
 
 onMounted(() => {
@@ -62,13 +78,15 @@ onMounted(() => {
 
 onUnmounted(() => {
   document.removeEventListener("keydown", handleKeyDown);
+  toggleBodyScroll(false);
 });
 
-const handleKeyDown = (event) => {
-  if (event.key === "Escape") {
-    hideDialog();
+watch(
+  () => props.show,
+  (newVal) => {
+    toggleBodyScroll(newVal);
   }
-};
+);
 </script>
 
 <style scoped lang="scss">
