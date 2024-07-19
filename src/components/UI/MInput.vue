@@ -10,7 +10,38 @@
     >
       {{ label }}
     </label>
+    <div
+      class="input-wrapper"
+      v-if="props.counter"
+    >
+      <button
+        type="button"
+        class="decrement"
+        @click="decrement"
+      >
+        -
+      </button>
+      <input
+        v-model="model"
+        v-bind="$attrs"
+        :class="['input-counter', inputStateClass]"
+        :type="type"
+        :id="uuid"
+        :placeholder="!label ? placeholder : ''"
+        v-maska="props.mask"
+        @focus="handleFocus"
+        @blur="handleBlur"
+      />
+      <button
+        type="button"
+        class="increment"
+        @click="increment"
+      >
+        +
+      </button>
+    </div>
     <input
+      v-else
       v-model="model"
       v-bind="$attrs"
       :class="['input', inputStateClass]"
@@ -72,6 +103,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  counter: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const uuid = uuidv4();
@@ -97,6 +132,22 @@ const inputStateClass = computed(() => {
   if (isFocused.value) return "input-focused-border";
   return "";
 });
+
+const increment = () => {
+  if (model.value === "" || isNaN(Number(model.value))) {
+    model.value = 0;
+  }
+  model.value = Number(model.value) + 1;
+};
+
+const decrement = () => {
+  if (model.value === "" || isNaN(Number(model.value))) {
+    model.value = 0;
+  }
+  if (Number(model.value) > 0) {
+    model.value = Number(model.value) - 1;
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -128,6 +179,59 @@ const inputStateClass = computed(() => {
   &.input-error .input {
     border-color: #f87171;
     box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.5);
+  }
+
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+
+    .decrement,
+    .increment {
+      background: #f3f4f6;
+      border: 1px solid #f3f4f6;
+      color: #374151;
+      padding: 0.5rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .input-counter {
+      border: 1px solid #f3f4f6;
+      border-radius: 0;
+      background: #f3f4f6;
+      color: #000000;
+      padding: 0.5rem 0rem;
+      font-size: 1rem;
+      width: 100%;
+      transition: all 0.3s 0s ease;
+      text-align: center;
+
+      &::placeholder {
+        color: #6b7280;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &.input-focused-border {
+        border-color: none;
+      }
+
+      &.input-error-border {
+        border-color: #f87171;
+      }
+    }
+
+    .decrement {
+      border-right: none;
+      border-radius: 14px 0 0 14px;
+    }
+
+    .increment {
+      border-left: none;
+      border-radius: 0 14px 14px 0;
+    }
   }
 }
 

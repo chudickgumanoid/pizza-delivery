@@ -6,15 +6,31 @@
     />
     <m-text variant="h5">{{ props.pizza.name }}</m-text>
     <m-text variant="paragraph">{{ props.pizza.description }}</m-text>
-    <div>каунтер</div>
-    <div>изменить</div>
+    <div>
+      <m-input
+        v-model:value="count"
+        :counter="true"
+      />
+    </div>
+    <m-button
+      variant="link"
+      size="sm"
+      class="!tw-text-quartenery !tw-font-normal !tw-text-xs"
+    >
+      Изменить
+    </m-button>
     <m-text variant="h5">{{ toLocaleString(props.pizza.price) }} р</m-text>
-    <div><cross-icon /></div>
+    <div class="hover:tw-opacity-50 tw-cursor-pointer tw-transition-all">
+      <cross-icon />
+    </div>
   </div>
 </template>
 
 <script setup>
 import { toLocaleString } from "@/utils/helper/toLocaleString";
+import { ref } from "vue";
+
+const count = ref(1);
 
 const props = defineProps({
   pizza: Object,
