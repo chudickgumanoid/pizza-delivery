@@ -19,6 +19,5 @@ export const toLocaleString = (number, format = true) => {
     return format ? number.replace(".00", "") : number;
   }
 
-  console.log("тест");
   return "0.00";
 };
